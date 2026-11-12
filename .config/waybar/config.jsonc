@@ -1,0 +1,114 @@
+{
+  "layer": "top",
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock","custom/openwindowscounter"],
+  "modules-right": [
+    "hyprland/submap",
+    "group/volume",
+    "custom/battery",
+    "bluetooth",
+    "network",
+    "cpu",
+    "memory",
+    "power-profiles-daemon",
+  ],
+  "hyprland/window": {
+    "max-length": 50
+  },
+  "custom/battery": {
+    "exec": "~/.config/waybar/battery-display.sh",
+    "interval": 10,
+    "signal": 8,
+    "on-click": "~/.config/waybar/battery-toggle.sh"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "exec ghostty --title=bluetui -e bluetui"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "{usage}% {max_frequency}GHz",
+    "max-length": 100,
+    "on-click": "exec ghostty --title=btop -e btop"
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {percentage}%",
+    "tooltip-format": "{used:0.1f}G/{total:0.1f}G used",
+    "on-click": "exec ghostty --title=htop -e htop"
+  },
+  "network": {
+    "format": "",
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-disconnected": "󰤭", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "󰖪",
+    "max-length": 50,
+    "on-click": "exec nmrs"
+  },
+  "clock": {
+    "format": "{:%a, %d. %b %I:%M %p}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "format": {
+        "today": "<span color='#75f1fa'><b>{}</b></span>"
+      }
+    },
+    "on-click": "exec chromium --app=https://calendar.google.com"
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", ""]
+    },
+    "scroll-step": 1,
+    "ignored-sinks": ["Easy Effects Sink"],
+    "on-click": "pavucontrol"
+  },
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "format-icons": {
+      "performance": "PERF",
+      "balanced": "BAL",
+      "power-saver": "SAVE",
+      "default": "BAL",
+    }
+  },
+
+  "group/volume": {
+    "orientation": "horizontal",
+    "modules": ["pulseaudio", "pulseaudio/slider"]
+  },
+  "ext/workspaces": {
+    "format":"{name}: {icon}",
+    "on-click": "activate"
+  },
+
+  "custom/openwindowscounter": {
+    "format": "🗖 {}",
+    "restart-interval": 2, // How often it updates (in seconds)
+    "exec": "/home/bryce/window_counter2.sh ",
+    "return-type": "plain",
+    },
+  
+  
+	
+
+  
+}
